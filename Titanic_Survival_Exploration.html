@@ -1697,7 +1697,25 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer</strong>: <code>80.13%</code></p>
+<p><strong>Answer</strong>: 
+The final accuracy is <code>80.13%</code></p>
+
+<pre><code>           Sex
+       (f) / \ (m)
+        Age   Age
+   (&gt;40)/ \   / \ (&lt;10)
+    Pclass 1  0  1
+   (1)/ \ (2/3)
+     1   0
+
+
+</code></pre>
+<ul>
+<li>First, I've tried several features to split, and I found that the <code>SibSp</code> and <code>Parch</code> are not likely to show a significant split point (they showed similar pattern no matter how I split them) , so I tried to focus on <code>Pclass</code> and <code>Age</code> for male and female respectively.</li>
+<li>It is important to keep in mind when we split at <code>Sex</code> and predict all the female for <code>1</code> male for <code>0</code>, there are a lot false positive in female and false negative in male. What we did in <code>prediction_2</code> reduced some false nagetive, so it is likely to increase accuracy by reducing false positive.</li>
+<li>By looking at different <code>Pclass</code> only, it is still difficult to split since most female were saved. However, if we include <code>Age</code> at the same time, we can notice there is a split point for <code>["Sex == 'female'","Pclass == 3"]</code> at <code>Age == 40</code>. </li>
+<li>Actually, there are some other way can result in similar accuracy with more complicated splits. I select the most simple one to avoid overfitting.</li>
+</ul>
 
 </div>
 </div>
